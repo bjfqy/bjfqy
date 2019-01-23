@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oBtn = document.getElementById("btnChange");
+            var oUl1 = document.getElementById("ul1");
+            oBtn.onclick = function () {
+ 
+                var aLi = oUl1.getElementsByTagName("li");
+                var arr = [];
+                for (var i = 0; i < aLi.length; i++) {
+                    arr[i] = aLi[i];
+                }
+                arr.sort(function (li1, li2) {
+                    var n1 = parseInt(li1.innerText);
+                    var n2 = parseInt(li2.innerText);
+                    return n1 - n2;
+                });
+                for (var i = 0; i < aLi.length; i++) {
+                    oUl1.appendChild(arr[i]);
+                }
+            }
+        }
+
+      //利用jquery中的get方法获取json数据
+      $.get("exp.json","",function(data){
+        var newdata=data.result
+        //根据价格（price）排序
+        function sortprice(a,b){
+          return a.price-b.price
+        }
+        //利用js中的sort方法
+        newdata.sort(sortprice);
+        //打印排序后的数据到控制台
+        console.log(newdata);
+      })
+   
+    </script>
+</head>
+<body>
+    <input type="button" name="" value="移动" id="btnChange" />
+    <ul id="ul1">
+        <li>5</li>
+        <li>2</li>
+        <li>9</li>
+        <li>4</li>
+        <li>7</li>
+    </ul>
+</body>
+</html>
